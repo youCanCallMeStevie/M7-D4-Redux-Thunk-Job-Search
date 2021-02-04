@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {  Container } from "react-bootstrap";
+import {  Container, Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import uniqid from "uniqid";
 import Job from "../../Components/Job/Job";
@@ -25,12 +25,20 @@ class FavList extends Component {
               : "You have no favorite jobs"}
           </h2>
           <hr />
-          {favourites &&
+      <Table striped bordered hover>
+        <tbody>
+        {favourites &&
             favourites.map(job => (
               <div key={uniqid}>
                 <Job job={job} history={this.props.history} />
               </div>
             ))}
+        </tbody>
+      </Table>
+
+
+
+          
         </div>
       </Container>
     );

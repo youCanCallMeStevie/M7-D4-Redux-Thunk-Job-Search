@@ -18,9 +18,16 @@ function JobDetails(props) {
   const dispatch = useDispatch();
   
   const handleFav =  () => {
-     
-    if (toggleFav){
+    // const toggle = props.favourites.jobs.some((jobs) => jobs.id == jobDetails.id);
     
+    // if (toggle){
+    //   dispatch({type:"REMOVE_JOB_FROM_FAVS",payload:jobDetails})
+    //   setToggleFav(!toggle)
+    //   } else {
+    //   dispatch({type:"ADD_JOB_TO_FAVS",payload:jobDetails})
+    //   setToggleFav(toggle)
+    //   }
+    if (toggleFav){
     dispatch({type:"REMOVE_JOB_FROM_FAVS",payload:jobDetails})
     setToggleFav(!toggleFav
       )
@@ -61,6 +68,7 @@ function JobDetails(props) {
                   className="logo"
                   style={{width: "400px"}}
                 />
+                <div style={{display: "inline-block"}}>
                 <Link to="/">
                   <Button className="every-button mt-5">
                     {" "}
@@ -82,13 +90,13 @@ function JobDetails(props) {
                       {" "}
                       <FontAwesomeIcon
                         icon={faHeart}
-                        className="icon-padding"
+                        className="icon-padding "
                         style={{ color: "red" }}
                       />
                     </Button>
                   ) : (
                     <Button
-                      className="every-button"
+                      className="every-button mt-5"
                       onClick={() => handleFav()
                         // props.addToFavs(jobDetails)
                       }
@@ -104,6 +112,7 @@ function JobDetails(props) {
                 ) : (
                   <div>**Log in to save job details</div>
                 )}
+                </div>
               </Col>
               <Col lg={6} md={12} className="px-4">
                 <h2>{jobDetails?.company}</h2>

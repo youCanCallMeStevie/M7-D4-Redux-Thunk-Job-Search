@@ -26,12 +26,12 @@ function Job(props) {
     <>
 <tr>
       <td>
-        <Image src={
+      <Link to={`/details/${job.id}`}><Image src={
               job?.company_logo
                 ? job?.company_logo
                 : "http://placehold.it/50x50"
             }
-            className="company-logo-card" thumbnail style={{width: "25px"}}/></td>
+            className="company-logo-card" thumbnail style={{width: "25px"}}/></Link></td>
       <td>{job?.company}</td>
       <td><Link to={`/details/${job.id}`}>
               <Button variant="primary" className="every-button">
