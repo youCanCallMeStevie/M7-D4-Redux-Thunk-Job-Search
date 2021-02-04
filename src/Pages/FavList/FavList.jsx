@@ -29,16 +29,12 @@ class FavList extends Component {
         <tbody>
         {favourites &&
             favourites.map(job => (
-              <div key={uniqid}>
-                <Job job={job} history={this.props.history} />
-              </div>
+              
+                <Job job={job} key={uniqid} history={this.props.history} />
+             
             ))}
         </tbody>
       </Table>
-
-
-
-          
         </div>
       </Container>
     );

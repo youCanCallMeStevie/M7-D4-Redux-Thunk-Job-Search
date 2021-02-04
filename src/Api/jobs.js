@@ -1,5 +1,5 @@
 
-export const getJobResults = async (position="Django", location="Berlin") => { //how to give default!
+export const getJobResults = async (position="JavaScript", location="Berlin") => { //how to give default!
     try {
       const response = await fetch(
         `https://my--cors--anywhere.herokuapp.com/https://jobs.github.com/positions.json?description=${position}&location=${location}`

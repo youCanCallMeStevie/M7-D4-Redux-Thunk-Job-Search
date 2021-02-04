@@ -14,9 +14,9 @@ console.log("location", location)
       <div className="mt-5 border-top border-secondary">
         <h2 className="my-3">
           {jobList.length > 0
-            ? `Showing ${jobList.length} results ${
-                jobList.length === 1 ? "job" : "jobs"
-              } for ${position} & ${position.input}`
+            ? `Showing ${jobList.length}  ${
+                jobList.length === 1 ? "Job" : "Jobs"
+              } Results`
             : "You have no results"}
         </h2>
         <hr />

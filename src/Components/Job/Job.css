@@ -1,8 +1,7 @@
 .company-logo-card {
-  min-width: 200px;
+  width: 75px;
 }
 
-.company-card,
-.card {
-  min-width: 220px;
+.job-title-row {
+  max-width: 500px;
 }

@@ -29,15 +29,15 @@ function Job(props) {
       <Link to={`/details/${job.id}`}><Image src={
               job?.company_logo
                 ? job?.company_logo
-                : "http://placehold.it/50x50"
+                : "http://placehold.it/25x25"
             }
-            className="company-logo-card" thumbnail style={{width: "25px"}}/></Link></td>
-      <td>{job?.company}</td>
+            className="company-logo-card" thumbnail /></Link></td>
+      <td className="job-title-row"><h4>{job?.title}</h4>{job?.company}</td>
       <td><Link to={`/details/${job.id}`}>
               <Button variant="primary" className="every-button">
                 {" "}
-                <FontAwesomeIcon icon={faForward} className="icon-padding" />
-                See more
+                <div style={{display: 'inline'}}><span><FontAwesomeIcon icon={faForward} className="icon-padding" /></span>
+               <span>More</span></div>
               </Button>
             </Link>
             {props.match.path == "/favs" && (
