@@ -4,17 +4,22 @@ import Search from "../../Components/Search/Search";
 import JobList from "../../Components/JobList/JobList";
 import { getJobResults } from "../../Api/jobs";
 import "../Home/Home.css";
-
+import {useDispatch, useSelector} from "react-redux";
+import {setSearchResult} from "../../reducers/index"
 function Home() {
   const [searchPosition, setSearchPosition] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
-  const [jobList, setJobList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch()
+  const {jobs } = useSelector(state=>state.search)
+  const {favourites } = useSelector(state=>state)
 
   const defaultJobSearch = async () => {
     const jobs = await getJobResults();
-    setJobList(jobs);
     setIsLoading(false);
+    dispatch(setSearchResult(jobs))
+    console.log("favourites", favourites)
+
   };
 
   useEffect(() => {
@@ -24,8 +29,8 @@ function Home() {
   const handleSearch = async (e) => {
     setIsLoading(true);
     const jobs = await getJobResults(searchPosition, searchLocation);
-    setJobList(jobs);
     setIsLoading(false);
+    dispatch(setSearchResult(jobs))
   };
 
   const updateSearch = async (e) => {
@@ -37,8 +42,6 @@ function Home() {
   const body = () => {
     return (
       <Row>
-        {/* <Col md={12}>
-          <div className="search-fields-container"> */}
             <Search
               handleSearch={handleSearch}
               updateSearch={updateSearch}
@@ -47,14 +50,10 @@ function Home() {
                 location: searchLocation,
               }}
             />
-          {/* </div>
-        </Col>
-
-        <Col md={12}>
-          <div> */}
-            <JobList jobList={jobList} />
-          {/* </div>
-        </Col> */}
+            <JobList jobList={jobs} values={{
+                position: searchPosition,
+                location: searchLocation,
+              }} />
       </Row>
     );
   };

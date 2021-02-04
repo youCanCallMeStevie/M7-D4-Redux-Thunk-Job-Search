@@ -6,6 +6,9 @@ import "../JobList/JobList.css";
 
 function JobList(props) {
   const { jobList } = props;
+  let { position, location } = props.values;
+console.log("position", position)
+console.log("location", location)
   return (
     <Container>
       <div className="mt-5 border-top border-secondary">
@@ -13,7 +16,7 @@ function JobList(props) {
           {jobList.length > 0
             ? `Showing ${jobList.length} results ${
                 jobList.length === 1 ? "job" : "jobs"
-              }`
+              } for ${position} & ${position.input}`
             : "You have no results"}
         </h2>
         <hr />

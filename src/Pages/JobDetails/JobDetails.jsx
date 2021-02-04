@@ -6,11 +6,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackward, faHeart } from "@fortawesome/free-solid-svg-icons";
 import "../JobDetails/JobDetails.css";
 import { useSelector,useDispatch } from "react-redux";
- 
+
  
 function JobDetails(props) {
-  const state = useSelector((state)=>state)
- 
+  
+  const {favourites, user} = useSelector((state)=>state)
   const [jobDetails, setJobDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [toggleFav, setToggleFav] = useState(false);
@@ -18,8 +18,7 @@ function JobDetails(props) {
   const dispatch = useDispatch();
   
   const handleFav =  () => {
-    // const toggle = props.favourites.jobs.some((jobs) => jobs.id == jobDetails.id);
-    
+    // const toggle = favourites.jobs.some((jobs)=>jobs.id ===jobDetails.id);
     // if (toggle){
     //   dispatch({type:"REMOVE_JOB_FROM_FAVS",payload:jobDetails})
     //   setToggleFav(!toggle)
@@ -41,6 +40,7 @@ function JobDetails(props) {
 
   useEffect(() => {
     getJobInfo();
+    console.log("test test")
   }, []);
 
   const getJobInfo = async () => {
@@ -79,7 +79,7 @@ function JobDetails(props) {
                     Go back
                   </Button>
                 </Link>
-                {state.user.username ? (
+                {user.username ? (
                   toggleFav ? (
                     <Button
                       className="every-button mt-5"

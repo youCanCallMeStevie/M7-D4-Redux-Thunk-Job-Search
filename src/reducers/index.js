@@ -32,8 +32,18 @@ export default function (state = {}, action) {
             username: action.payload,
           },
         };
+        case "SET_RESULTS":
+        return {
+          ...state,
+          search: {
+            ...state.search,
+            jobs: action.payload,
+          },
+        };
       default:
         return state;
     }
   }
   
+  //action creator function
+  export const setSearchResult = (jobList) => ({type: "SET_RESULTS",payload:jobList})
