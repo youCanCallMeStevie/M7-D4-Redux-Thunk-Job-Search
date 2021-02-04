@@ -13,117 +13,116 @@ function JobDetails(props) {
   const [jobDetails, setJobDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [toggleFav, setToggleFav] = useState(false);
-
   const dispatch = useDispatch();
 
   const handleFav = () => {
-    const toggle = favourites.jobs.some(jobs => jobs.id === jobDetails.id);
-    if (toggle) {
+    if (toggleFav) {
       dispatch({ type: "REMOVE_JOB_FROM_FAVS", payload: jobDetails });
-      setToggleFav(!toggle);
     } else {
       dispatch({ type: "ADD_JOB_TO_FAVS", payload: jobDetails });
-      setToggleFav(!toggle);
     }
-    };
+    setToggleFav(!toggleFav);
+    console.log("toggleFav", toggleFav)
+  };
+  const getJobInfo = async () => {
+    const jobId = props.match.params.jobId;
+    const job = await getOneJob(jobId);
+    setJobDetails(job);
+    setIsLoading(false);
+  };
 
-    const getJobInfo = async () => {
-      const jobId = props.match.params.jobId;
-      const job = await getOneJob(jobId);
-      setJobDetails(job);
-      setIsLoading(false);
-    };
+  useEffect(() => {
+    getJobInfo();
+    const toggle = favourites.jobs.some(jobs => jobs?.id === jobDetails?.id);
+    setToggleFav(toggle)
+  }, []);
 
-    useEffect(() => {
-      getJobInfo();
-    }, []);
+  const htmlJobDescription = () => {
+    return { __html: jobDetails?.description };
+  };
 
-    const htmlJobDescription = () => {
-      return { __html: jobDetails?.description };
-    };
-
-    const body = () => {
-      return (
-        <div>
-          {jobDetails && (
-            <Container>
-              <Row className="d-flex justify-content-center align-items-start mt-5">
-                <Col lg={6} md={12} className="p-5">
-                  <img
-                    src={jobDetails?.company_logo}
-                    alt="company-logo"
-                    className="logo"
-                    style={{ width: "400px" }}
-                  />
-                  <div style={{ display: "inline-block" }}>
-                    <Link to="/">
-                      <Button className="every-button mt-5">
+  const body = () => {
+    return (
+      <div>
+        {jobDetails && (
+          <Container>
+            <Row className="d-flex justify-content-center align-items-start mt-5">
+              <Col lg={6} md={12} className="p-5">
+                <img
+                  src={jobDetails?.company_logo}
+                  alt="company-logo"
+                  className="logo"
+                  style={{ width: "400px" }}
+                />
+                <div style={{ display: "inline-block" }}>
+                  <Link to="/">
+                    <Button className="every-button mt-5">
+                      {" "}
+                      <FontAwesomeIcon
+                        icon={faBackward}
+                        className="icon-padding"
+                      />
+                      Go back
+                    </Button>
+                  </Link>
+                  {user.username ? (
+                    !toggleFav ? (
+                      <Button
+                        className="every-button mt-5"
+                        onClick={
+                          () => handleFav()
+                          // props.addToFavs(jobDetails)
+                        }
+                      >
                         {" "}
                         <FontAwesomeIcon
-                          icon={faBackward}
-                          className="icon-padding"
+                          icon={faHeart}
+                          className="icon-padding "
+                          style={{ color: "white" }}
                         />
-                        Go back
                       </Button>
-                    </Link>
-                    {user.username ? (
-                      !toggleFav ? (
-                        <Button
-                          className="every-button mt-5"
-                          onClick={
-                            () => handleFav()
-                            // props.addToFavs(jobDetails)
-                          }
-                        >
-                          {" "}
-                          <FontAwesomeIcon
-                            icon={faHeart}
-                            className="icon-padding "
-                            style={{ color: "white" }}
-                          />
-                        </Button>
-                      ) : (
-                        <Button
-                          className="every-button mt-5"
-                          onClick={
-                            () => handleFav()
-                            // props.addToFavs(jobDetails)
-                          }
-                        >
-                          {" "}
-                          <FontAwesomeIcon
-                            icon={faHeart}
-                            className="icon-padding"
-                            style={{ color: "red" }}
-                          />
-                        </Button>
-                      )
                     ) : (
-                      <div>**Log in to save job details</div>
-                    )}
-                  </div>
-                </Col>
-                <Col lg={6} md={12} className="px-4">
-                  <h2>{jobDetails?.company}</h2>
-                  <div dangerouslySetInnerHTML={htmlJobDescription()} />
-                </Col>
-              </Row>
-            </Container>
-          )}
-        </div>
-      );
-    };
-
-    return (
-      <Container>
-        {isLoading ? (
-          <Spinner animation="border" variant="primary">
-            <span className="sr-only">Loading...</span>
-          </Spinner>
-        ) : (
-          body()
+                      <Button
+                        className="every-button mt-5"
+                        onClick={
+                          () => handleFav()
+                          // props.addToFavs(jobDetails)
+                        }
+                      >
+                        {" "}
+                        <FontAwesomeIcon
+                          icon={faHeart}
+                          className="icon-padding"
+                          style={{ color: "red" }}
+                        />
+                      </Button>
+                    )
+                  ) : (
+                    <div>**Log in to save job details</div>
+                  )}
+                </div>
+              </Col>
+              <Col lg={6} md={12} className="px-4">
+                <h2>{jobDetails?.company}</h2>
+                <div dangerouslySetInnerHTML={htmlJobDescription()} />
+              </Col>
+            </Row>
+          </Container>
         )}
-      </Container>
+      </div>
     );
   };
+
+  return (
+    <Container>
+      {isLoading ? (
+        <Spinner animation="border" variant="primary">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      ) : (
+        body()
+      )}
+    </Container>
+  );
+}
 export default withRouter(JobDetails);
