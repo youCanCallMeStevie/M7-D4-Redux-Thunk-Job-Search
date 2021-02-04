@@ -1,5 +1,6 @@
 .navbar-container {
   background-color: #134a73;
+  min-width: 515px;
 }
 
 h3.logoTitle {

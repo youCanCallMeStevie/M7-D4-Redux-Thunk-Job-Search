@@ -31,14 +31,6 @@ function JobDetails(props) {
     }
   };
 
-  /*const handleFav =  () => {
-    setToggleFav(!toggleFav);
-    if (toggleFav){
-    props.removeFromFavs(jobDetails?.id)
-    } else {
-    props.addToFavs(jobDetails?.id)
-    }
-  };*/
 
   useEffect(() => {
     getJobInfo();
@@ -67,12 +59,22 @@ function JobDetails(props) {
                   src={jobDetails?.company_logo}
                   alt="company-logo"
                   className="logo"
+                  style={{width: "400px"}}
                 />
+                <Link to="/">
+                  <Button className="every-button mt-5">
+                    {" "}
+                    <FontAwesomeIcon
+                      icon={faBackward}
+                      className="icon-padding"
+                    />
+                    Go back
+                  </Button>
+                </Link>
                 {state.user.username ? (
                   toggleFav ? (
                     <Button
-                      className="every-button"
-                      
+                      className="every-button mt-5"
                       onClick={() => handleFav()
                         // props.addToFavs(jobDetails)
                       }
@@ -106,16 +108,7 @@ function JobDetails(props) {
               <Col lg={6} md={12} className="px-4">
                 <h2>{jobDetails?.company}</h2>
                 <div dangerouslySetInnerHTML={htmlJobDescription()} />
-                <Link to="/">
-                  <Button className="every-button">
-                    {" "}
-                    <FontAwesomeIcon
-                      icon={faBackward}
-                      className="icon-padding"
-                    />
-                    Go back
-                  </Button>
-                </Link>
+                
               </Col>
             </Row>
           </Container>

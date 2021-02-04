@@ -1,26 +1,24 @@
-import React from 'react';
-import Job from '../Job/Job';
-import {Row, Col} from "react-bootstrap";
+import React from "react";
+import Job from "../Job/Job";
+import { Container, Table } from "react-bootstrap";
 import uniqid from "uniqid";
 import "../JobList/JobList.css";
 
-
-  
 function JobList(props) {
-
-	const { jobList } = props;
-	return (
-		<div>
-			<Row>
-            {jobList?.map((job) => (
-					<Col key={uniqid} sm={12} md={6} lg={3}>
-						<Job job={job} /> 
-						{/* pass one single job, not the whole list. this is a new prop */}
-					</Col>
-				))}
-			</Row>
-		</div>
-	);
+  const { jobList } = props;
+  return (
+    <div>
+    <Container style={{justifyContent:"center", alignContent:"center"}}>
+      <Table striped bordered hover>
+        <tbody>
+          {jobList?.map(job => (
+              <Job job={job} key={uniqid} />
+          ))}
+        </tbody>
+      </Table>
+	  </Container>
+    </div>
+  );
 }
 
 export default JobList;

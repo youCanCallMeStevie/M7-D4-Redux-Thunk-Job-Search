@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Card, Button } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import { Link, withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faForward, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -23,21 +23,17 @@ function Job(props) {
 
 
   return (
-    <div>
-      <Col md={3} className="my-3">
-        <Card className="">
-          <Card.Img
-            variant="top"
-            src={
+    <>
+<tr>
+      <td>
+        <Image src={
               job?.company_logo
                 ? job?.company_logo
-                : "http://placehold.it/100x100"
+                : "http://placehold.it/50x50"
             }
-            className="company-logo-card"
-          />
-          <Card.Body className="company-card">
-            <Card.Title>{job?.company}</Card.Title>
-            <Link to={`/details/${job.id}`}>
+            className="company-logo-card" thumbnail style={{width: "25px"}}/></td>
+      <td>{job?.company}</td>
+      <td><Link to={`/details/${job.id}`}>
               <Button variant="primary" className="every-button">
                 {" "}
                 <FontAwesomeIcon icon={faForward} className="icon-padding" />
@@ -56,12 +52,12 @@ function Job(props) {
                 />
                 Remove
               </Button>
-            )}
-          </Card.Body>
-        </Card>
-      </Col>
-    </div>
+              )}
+              </td>
+    </tr>
+</>
   );
 }
+
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Job));
