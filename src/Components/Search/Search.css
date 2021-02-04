@@ -1,0 +1,25 @@
+.input-icon-design {
+  color: #134a73;
+}
+
+.hero-image {
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  max-height: 500px;
+  z-index: -1;
+  min-width: 600px;
+}
+
+.search-container {
+  background-color: rgba(245, 245, 245, 0.468);
+  position: absolute;
+  top: 25%;
+  min-width: 500px;
+  height: 170px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+}
