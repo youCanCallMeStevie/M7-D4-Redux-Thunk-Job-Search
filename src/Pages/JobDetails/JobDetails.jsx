@@ -31,10 +31,11 @@ function JobDetails(props) {
     setIsLoading(false);
   };
 
-  useEffect(() => {
+  useEffect (() => {
     getJobInfo();
-    const toggle = favourites.jobs.some(jobs => jobs?.id === jobDetails?.id);
-    setToggleFav(toggle)
+    const toggle = favourites.jobs?.some(
+      (jobs) => jobs?.id == props.match.params.jobId
+    );    setToggleFav(toggle)
   }, []);
 
   const htmlJobDescription = () => {
@@ -115,6 +116,8 @@ function JobDetails(props) {
 
   return (
     <Container>
+              {toggleFav}
+
       {isLoading ? (
         <Spinner animation="border" variant="primary">
           <span className="sr-only">Loading...</span>
