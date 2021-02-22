@@ -41,6 +41,7 @@ function Home() {
 
   const body = () => {
     return (
+      <>
       <Row>
             <Search
               handleSearch={handleSearch}
@@ -50,11 +51,14 @@ function Home() {
                 location: searchLocation,
               }}
             />
+            </Row>
+            <Row>
             <JobList jobList={jobs} values={{
                 position: searchPosition,
                 location: searchLocation,
               }} />
       </Row>
+      </>
     );
   };
 
